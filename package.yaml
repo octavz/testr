@@ -1,0 +1,76 @@
+name:                testr-service
+version:             0.1.0.0
+github:              "githubuser/testr-service"
+license:             BSD3
+author:              "Author name here"
+maintainer:          "example@example.com"
+copyright:           "2018 Author name here"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/inline-service-template#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - scotty 
+  - text
+  - transformers
+  - postgresql-simple 
+  - bytestring
+  - data-default-class
+  - mtl
+  - exceptions
+  - network
+  - wai
+  - wai-extra
+  - http-types
+  - aeson
+  - time
+  - formatting
+  - monad-logger
+  - resourcet
+  - unliftio
+  - unliftio-core
+  - uuid
+  - random
+  - configurator
+  - resource-pool
+  - fast-logger
+
+library:
+  source-dirs: src
+
+executables:
+  testr-service-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - testr-service
+
+tests:
+  testr-service-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - testr-service
+    - hspec
+    - hspec-wai
+    - hspec-wai-json
+
