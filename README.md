@@ -1,1 +1,3 @@
-# inline-service-template
+# testr-service
+
+stack build && stack exec testr-service-exe
