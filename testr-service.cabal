@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c6451e64c66296bf27d01c2f8bd8b64c82e8e1c10557e7fc1cca313ba158e00c
+-- hash: 077040b96227942083a2a89553f7be6148e27d2ccb2f7128d3f430d4f85b998e
 
 name:           testr-service
 version:        0.1.0.0
@@ -27,7 +27,10 @@ source-repository head
 
 library
   exposed-modules:
+      Data.AppConfig
       Data.Database
+      Data.DTO
+      Data.Mapping
       Data.Models
       Data.Types
       Lib

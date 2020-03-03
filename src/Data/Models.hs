@@ -1,5 +1,5 @@
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DuplicateRecordFields #-}
 
 module Data.Models where
 
@@ -8,24 +8,30 @@ import GHC.Generics (Generic)
 import Database.PostgreSQL.Simple.ToRow
 import Database.PostgreSQL.Simple.ToField
 import Database.PostgreSQL.Simple.FromRow
-import Data.Aeson.Types
 
+data QuestionSet = 
+  QuestionSet{
+    questionSet_id :: Maybe T.Text
+    , questionSet_name :: Maybe T.Text
+  } deriving (Generic, Show)
+
+data QuizzDefQuestionSet = 
+  QuizzDefQuestionSet
+    {
+      quizzDefQuestionSet_quizzDefId :: T.Text,
+      quizzDefQuestionSet_questionSetId :: T.Text,
+      quizzDefQuestionSet_count :: T.Text
+    }  deriving (Generic, Show)
+    
 data QuizzDef =
   QuizzDef
-    { quizzDefId   :: Maybe T.Text
-    , quizzDefName :: T.Text
+    { quizzDef_id   :: T.Text
+    , quizzDef_name :: T.Text
     } deriving (Generic, Show)
 
 
-instance FromJSON QuizzDef where
-  parseJSON = withObject "QuizzDef" $ \v -> QuizzDef Nothing <$> v .: "name"
-
-instance ToJSON QuizzDef where
-  toJSON (QuizzDef id name) =
-    object ["id" .= id, "name" .= name ]
-
 instance ToRow QuizzDef where
-  toRow o = [toField (quizzDefId o), toField (quizzDefName o)]
+  toRow o = [toField (quizzDef_id o), toField (quizzDef_name o)]
 
 instance FromRow QuizzDef where
   fromRow = QuizzDef <$> field <*> field

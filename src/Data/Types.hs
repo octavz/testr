@@ -1,5 +1,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 
 module Data.Types where
 
@@ -41,3 +42,8 @@ runIO p m = do
   appConfig <- loadCfgFile
   withResource p (runReaderT (rApp m) . Env 3000 "0.1")
 
+class (MonadIO m) => ToDTO m a d where
+  toDTO :: a -> m d
+  
+class (MonadIO m) => FromDTO m d a where
+  fromDTO ::  d -> m a

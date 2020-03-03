@@ -41,7 +41,7 @@ class (MonadCatch m, MonadThrow m) =>
 instance (MonadReader e m, MonadIO m, MonadThrow m, MonadCatch m, HasConnection e) => Database m where
   createQuizzDef o = do
     c <- asks getConn
-    _ <- liftIO $ execute c "INSERT INTO quizz_def(id, name) VALUES (?,?)" (quizzDefId o, quizzDefName o)
+    _ <- liftIO $ execute c "INSERT INTO quizz_def(id, name) VALUES (?,?)" (quizzDef_id o, quizzDef_name o)
     return o
   getAllQuizzDef = do
     c <- asks getConn
